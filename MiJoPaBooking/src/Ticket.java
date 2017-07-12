@@ -1,10 +1,12 @@
 import java.util.Date;
 
 public class Ticket {
+	
+	public static int ticketNumber = 100;
 
 	TICKETTYPE ticketType;
 	String passengerName;
-	String flightNumber;
+	AirPlane flight;
 	String startingLocation;
 	String destination;
 	int ticketSerialNumber;
@@ -15,14 +17,16 @@ public class Ticket {
 	
 	
 	//Constructor
-	public Ticket (TICKETTYPE ticketType, String passengerName, String flightNumber, String startingLocation, String destination, int ticketSerialNumber, 
+	public Ticket (TICKETTYPE ticketType, String passengerName, AirPlane flight, String startingLocation, String destination, 
 					int seatNumber, Date flightDate ){
+		Ticket.ticketNumber++;
+		this.ticketSerialNumber = ticketNumber;
+		
 		this.ticketType = ticketType;
 		this.passengerName = passengerName;
-		this.flightNumber =flightNumber;
+		this.flight =flight;
 		this.startingLocation = startingLocation;
-		this.destination = destination;
-		this.ticketSerialNumber = ticketSerialNumber;
+		this.destination = destination;		
 		this.seatNumber = seatNumber;
 		this.flightDate=flightDate;
 				
@@ -53,13 +57,13 @@ public class Ticket {
 		this.seatNumber = seatNumber;
 	}
 
-	public String getFlightNumber() {
-		return flightNumber;
+	public AirPlane getFlight() {
+		return flight;
 	}
 	
 		
-	public void setFlightNumber(String flightNumber) {
-		this.flightNumber = flightNumber;
+	public void setFlightNumber(AirPlane flight) {
+		this.flight = flight;
 	}
 
 	public String getStartingLocation() {
