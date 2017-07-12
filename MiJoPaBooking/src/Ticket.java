@@ -2,38 +2,39 @@ import java.util.Date;
 
 public class Ticket {
 
-	String ticketName;
+	TICKETTYPE ticketType;
 	String passengerName;
 	String flightNumber;
 	String startingLocation;
 	String destination;
 	int ticketSerialNumber;
 	int seatNumber;
-	Date localDate;
-	double ticketPrice;
+	Date dateOfIssue;
+	Date flightDate;
+	
 	
 	
 	//Constructor
-	public Ticket (String ticketName, String passengerName, String flightNumber, String startingLocation, String destination, int ticketSerialNumber, 
-					int seatNumber, double ticketPrice){
-		this.ticketName = ticketName;
+	public Ticket (TICKETTYPE ticketType, String passengerName, String flightNumber, String startingLocation, String destination, int ticketSerialNumber, 
+					int seatNumber, Date flightDate ){
+		this.ticketType = ticketType;
 		this.passengerName = passengerName;
 		this.flightNumber =flightNumber;
 		this.startingLocation = startingLocation;
 		this.destination = destination;
 		this.ticketSerialNumber = ticketSerialNumber;
 		this.seatNumber = seatNumber;
-		this.ticketPrice = ticketPrice;
+		this.flightDate=flightDate;
 				
 	}
 
 	//All the methods
-	public String getTicketName() {
-		return ticketName;
+	public TICKETTYPE getTicketName() {
+		return ticketType;
 	}
 
-	public void setTicketName(String ticketName) {
-		this.ticketName = ticketName;
+	public void setTicketName(TICKETTYPE ticketName) {
+		this.ticketType = ticketName;
 	}
 
 	public String getPassengerName() {
@@ -55,7 +56,12 @@ public class Ticket {
 	public String getFlightNumber() {
 		return flightNumber;
 	}
+	
 		
+	public void setFlightNumber(String flightNumber) {
+		this.flightNumber = flightNumber;
+	}
+
 	public String getStartingLocation() {
 		return startingLocation;
 	}
@@ -76,16 +82,19 @@ public class Ticket {
 		return ticketSerialNumber;
 	}
 
-	public Date getLocalDate() {
-		return localDate;
+	public Date getDateOfIssue() {
+		return dateOfIssue;
 	}
 
-	public double getTicketPrice() {
-		return ticketPrice;
+	public Date getFlightDate() {
+		return flightDate;
 	}
-	
-	
-	
-	
+
+	public void setFlightDate(Date flightDate) {
+		this.flightDate = flightDate;
+	}
+
+
+
 	
 }
