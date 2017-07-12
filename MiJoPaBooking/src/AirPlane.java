@@ -8,19 +8,19 @@ public abstract class AirPlane {
 	protected int numberOfSeatsBusinessClass;
 
 	protected double flyHours;
-	protected Date flyingDate;	
+	protected int flyingDate;	
 	
 	
 	
 	
 	
 	//Constructor
-	public AirPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass, double flyHours, Date flyingDate) {
+	public AirPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass, double flyHours, int i) {
 		this.airPlaneName = airPlaneName;
 		this.numberOfSeatsFirstClass = numberOfSeatsFirstClass;
 		this.numberOfSeatsBusinessClass = numberOfSeatsBusinessClass;
 		this.flyHours = flyHours;
-		this.flyingDate = flyingDate;
+		this.flyingDate = i;
 		
 	}
 
@@ -65,20 +65,20 @@ public abstract class AirPlane {
 	}
 
 
-	public Date getFlyingDate() {
+	public int getFlyingDate() {
 		return flyingDate;
 	}
 
 
-	public void setFlyingDate(Date flyingDate) {
+	public void setFlyingDate(int flyingDate) {
 		this.flyingDate = flyingDate;
 	}
 
 
 	
 	
-	public ArrayList <AirPlane> mySeatFirstClass = new ArrayList <AirPlane>();
-	public ArrayList <AirPlane> mySeatBusinessClass = new ArrayList<AirPlane>();
+	public ArrayList<Ticket> mySeatFirstClass = new ArrayList <Ticket>();
+	public ArrayList <Ticket> mySeatBusinessClass = new ArrayList<Ticket>();
 	
 	
 	
