@@ -1,28 +1,27 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class AirPlane {
 	
 	protected String airPlaneName;
-	protected int numberOfSeats;
-	protected int seatNumber;
+	protected int numberOfSeatsFirstClass;
+	protected int numberOfSeatsBusinessClass;
+
 	protected double flyHours;
 	protected Date flyingDate;	
 	
-	PassengerPlane modelName;
-	PassengerPlane model;
+	
 	
 	
 	
 	//Constructor
-	public AirPlane(String airPlaneName, int numberOfSeats, int seatNumber, double flyHours,Date flyingDate, PassengerPlane modelName,
-			PassengerPlane model) {
+	public AirPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass, double flyHours, Date flyingDate) {
 		this.airPlaneName = airPlaneName;
-		this.numberOfSeats = numberOfSeats;
-		this.seatNumber = seatNumber;
+		this.numberOfSeatsFirstClass = numberOfSeatsFirstClass;
+		this.numberOfSeatsBusinessClass = numberOfSeatsBusinessClass;
 		this.flyHours = flyHours;
 		this.flyingDate = flyingDate;
-		this.modelName = modelName;
-		this.model = model;
+		
 	}
 
 
@@ -37,15 +36,24 @@ public abstract class AirPlane {
 	}
 
 
-	public int getSeatNumber() {
-		return seatNumber;
+	public int getnumberOfSeatsFirstClass() {
+		return numberOfSeatsFirstClass;
 	}
 
 
-	public void setSeatNumber(int seatNumber) {
-		this.seatNumber = seatNumber;
+	public void setnumberOfSeatsFirstClass(int numberOfSeatsFirstClass) {
+		this.numberOfSeatsFirstClass = numberOfSeatsFirstClass;
+	}
+	
+	public int getnumberOfSeatsBusinessClass() {
+		return numberOfSeatsBusinessClass;
 	}
 
+
+	public void setnumberOfSeatsBusinessClass(int numberOfSeatsBusinessClass) {
+		this.numberOfSeatsFirstClass = numberOfSeatsBusinessClass;
+	}
+	
 
 	public double getFlyHours() {
 		return flyHours;
@@ -67,22 +75,10 @@ public abstract class AirPlane {
 	}
 
 
-	public int getNumberOfSeats() {
-		return numberOfSeats;
-	}
-
-
-	public PassengerPlane getModelName() {
-		return modelName;
-	}
-
-
-	public PassengerPlane getModel() {
-		return model;
-	}
 	
 	
-	
+	public ArrayList <AirPlane> mySeatFirstClass = new ArrayList <AirPlane>();
+	public ArrayList <AirPlane> mySeatBusinessClass = new ArrayList<AirPlane>();
 	
 	
 	

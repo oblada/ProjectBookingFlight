@@ -2,23 +2,28 @@ import java.util.Date;
 
 public class PassengerPlane extends AirPlane {
 	
+	private String modelName;
+	private String model;
 	
-	public PassengerPlane(String airPlaneName, int numberOfSeats, int seatNumber, double flyHours,Date flyingDate, PassengerPlane modelName,
-			PassengerPlane model) {
-		super(airPlaneName, numberOfSeats, seatNumber, flyHours, flyingDate, modelName, model);
+	
+	public PassengerPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass, double flyHours, Date flyingDate, String modelName, String model) {
+		super(airPlaneName, numberOfSeatsFirstClass, numberOfSeatsBusinessClass, flyHours, flyingDate);
+		this.modelName = modelName;
+		this.model = model;
 		
-		
 	}
 
 
-	public PassengerPlane getModelName() {
-		return getModelName();
+	public String getModelName() {
+		return modelName;
 	}
 
 
-	public PassengerPlane getModel() {
-		return getModel();
+	public String getModel() {
+		return model;
 	}
+
+
 	
 	
 	
