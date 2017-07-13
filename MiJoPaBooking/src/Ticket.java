@@ -5,6 +5,7 @@ import java.util.Date;
 public class Ticket {
 	
 	public static int ticketNumber = 100;
+	
 	private TICKETTYPE ticketType;
 	private String passengerName;
 	private int ticketSerialNumber;
@@ -14,7 +15,7 @@ public class Ticket {
 	
 	
 	//Constructor
-	public Ticket (TICKETTYPE ticketType, String passengerName,  int ticketSerialNumber, LocalDateTime flightDate ){
+	public Ticket (TICKETTYPE ticketType, String passengerName, LocalDateTime flightDate ){
 		Ticket.ticketNumber++;
 		this.ticketSerialNumber = ticketNumber;
 		this.ticketType = ticketType;
