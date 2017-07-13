@@ -1,4 +1,5 @@
 
+//Test
 enum Airport {
 	REYKJAVIK("Reykjavik"),
 	DUBLIN("Dublin"), 
