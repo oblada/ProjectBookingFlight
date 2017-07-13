@@ -8,7 +8,7 @@ public class Flight {
 	private Airport destination;
 	private LocalDateTime departurTime;
 	private AirPlane airPlane;
-	private static int flightNumber = 101;
+	private static int flightNumber = 100;
 	private int flightSerialNumber ;
 	
 	ArrayList <Ticket> ticket = new ArrayList <Ticket>();
