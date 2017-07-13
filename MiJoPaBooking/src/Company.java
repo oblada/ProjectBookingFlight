@@ -11,8 +11,6 @@ public class Company {
 		airplanes.add(new PassengerPlane("CrashN", 5, 5, "Tupol", "V"));
 		airplanes.add(new PassengerPlane("Burn", 10, 20, "Sputter", "000"));
 		airplanes.add(new PassengerPlane("N2DGround", 8, 14, "GasBag", "Hindenburg"));
-		
-		
 	}
 	
 	public ArrayList<AirPlane> getAirplanes() {
