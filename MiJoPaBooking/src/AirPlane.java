@@ -77,8 +77,8 @@ public abstract class AirPlane {
 
 	
 	
-	public ArrayList <AirPlane> mySeatFirstClass = new ArrayList <AirPlane>();
-	public ArrayList <AirPlane> mySeatBusinessClass = new ArrayList<AirPlane>();
+	public ArrayList <Ticket> mySeatFirstClass = new ArrayList <Ticket>();
+	public ArrayList <Ticket> mySeatBusinessClass = new ArrayList<Ticket>();
 	
 	
 	
