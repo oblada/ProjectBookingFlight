@@ -59,6 +59,6 @@ public class Ticket {
 	}
 
 
-	ArrayList <Food> foodChoices = new ArrayList<Food>();
+	ArrayList <FOOD> foodChoices = new ArrayList<FOOD>();
 	
 }
