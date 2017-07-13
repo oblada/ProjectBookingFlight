@@ -1,6 +1,6 @@
 
 
-//Latest
+//Latest    
 public class PassengerPlane extends AirPlane {
 	
 	private String modelName;
