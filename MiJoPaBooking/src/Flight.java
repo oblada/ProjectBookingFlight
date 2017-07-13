@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Flight {
 	
@@ -54,9 +55,30 @@ public class Flight {
 	public ArrayList<Ticket> getTicket() {
 		return ticket;
 	}
+	
+	public void addTicket(Ticket t) {
+		ticket.add(t);
+	}
 
+	public int getNumberFirstClassTickets() {
+		int count = 0;
+		for (Ticket t : ticket) {
+			if (t.getTicketName() == TICKETTYPE.FIRST) {
+				count++;
+			}
+		}
+		return count;
+	}
 	
-	
+	public int getNumberEconomyTickets() {
+		int count = 0;
+		for (Ticket t : ticket) {
+			if (t.getTicketName() == TICKETTYPE.ECONOMY) {
+				count++;
+			}
+		}
+		return count;
+	}
 	
 	
 }
