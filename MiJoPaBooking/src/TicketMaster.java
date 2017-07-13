@@ -107,7 +107,7 @@ public class TicketMaster {
 				} else {
 					System.out.println("Do you want to restart the booking? (Y/N)");
 					char choiceB = scan.next().charAt(0);
-					if(choice=='Y' || choice=='y') continue;
+					if(choiceB=='Y' || choiceB=='y') continue;
 					else return null;
 				}
 			}
@@ -128,7 +128,11 @@ public class TicketMaster {
 	}
 
 	private void TheFoodService(Ticket newTicket) {
-		// TODO Auto-generated method stub
+		System.out.println("Do you want to have a meal on the flight? (Y/N)");
+		char choice = scan.next().charAt(0);
+		if(choice=='Y' || choice=='y') {
+			
+		}
 
 	}
 // Getters and Setters -------------------------------------
