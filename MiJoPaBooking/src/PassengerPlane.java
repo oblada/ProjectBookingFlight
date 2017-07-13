@@ -24,7 +24,9 @@ public class PassengerPlane extends AirPlane {
 		return model;
 	}
 
-
+	public String toString() {
+		return airPlaneName + " 1st: " + numberOfSeatsFirstClass + " Economy " + numberOfSeatsBusinessClass;
+	}
 	
 	
 	
