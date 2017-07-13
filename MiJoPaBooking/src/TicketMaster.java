@@ -9,7 +9,7 @@ public class TicketMaster {
 
 	static Scanner scan = new Scanner(System.in);
 
-	// Constructor ----------------------------------------------
+	//    Constructor ----------------------------------------------
 
 	public TicketMaster() {		//add ArrayList<Airport> destinations
 		//this.destinations = destinations;
