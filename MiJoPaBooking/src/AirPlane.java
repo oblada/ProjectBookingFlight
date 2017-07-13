@@ -7,20 +7,18 @@ public abstract class AirPlane {
 	protected int numberOfSeatsFirstClass;
 	protected int numberOfSeatsBusinessClass;
 
-	protected double flyHours;
-	protected int flyingDate;	
 	
 	
 	
 	
 	
 	//Constructor
-	public AirPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass, double flyHours, int i) {
+	public AirPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass) {
 		this.airPlaneName = airPlaneName;
 		this.numberOfSeatsFirstClass = numberOfSeatsFirstClass;
 		this.numberOfSeatsBusinessClass = numberOfSeatsBusinessClass;
-		this.flyHours = flyHours;
-		this.flyingDate = i;
+	
+	
 		
 	}
 
@@ -55,34 +53,10 @@ public abstract class AirPlane {
 	}
 	
 
-	public double getFlyHours() {
-		return flyHours;
-	}
-
-
-	public void setFlyHours(double flyHours) {
-		this.flyHours = flyHours;
-	}
-
-
-	public int getFlyingDate() {
-		return flyingDate;
-	}
-
-
-	public void setFlyingDate(int flyingDate) {
-		this.flyingDate = flyingDate;
-	}
-
-
 	
 	
-<<<<<<< HEAD
-	public ArrayList <Ticket> mySeatFirstClass = new ArrayList <Ticket>();
-=======
-	public ArrayList<Ticket> mySeatFirstClass = new ArrayList <Ticket>();
->>>>>>> branch 'master' of https://github.com/oblada/ProjectBookingFlight.git
-	public ArrayList <Ticket> mySeatBusinessClass = new ArrayList<Ticket>();
+//	public ArrayList <Ticket> mySeatFirstClass = new ArrayList <Ticket>();
+//	public ArrayList <Ticket> mySeatBusinessClass = new ArrayList<Ticket>();
 	
 	
 	
