@@ -1,4 +1,5 @@
 
+
 public enum FOOD {
 	NOTHING ("No meal", 0), 
 	VEGETARIAN ("Vegetarian", 120 ), 
