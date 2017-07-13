@@ -3,26 +3,27 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Ticket {
-	
+
 	public static int ticketNumber = 100;
-	
+
 	private TICKETTYPE ticketType;
 	private String passengerName;
 	private int ticketSerialNumber;
 	private LocalDateTime dateOfIssue;
 	private LocalDateTime flightDate;
-	
-	
-	
+	private Flight flight;
+	private ArrayList <FOOD> foodChoices = new ArrayList<FOOD>();
+
 	//Constructor
-	public Ticket (TICKETTYPE ticketType, String passengerName, LocalDateTime flightDate ){
+	public Ticket (TICKETTYPE ticketType, String passengerName, LocalDateTime flightDate, Flight flight){
 		Ticket.ticketNumber++;
 		this.ticketSerialNumber = ticketNumber;
 		this.ticketType = ticketType;
 		this.passengerName = passengerName;
 		this.flightDate = flightDate;
 		this. dateOfIssue= LocalDateTime.now();
-				
+		this.flight = flight;
+		flight.addTicket(this);
 	}
 
 	//All the methods
@@ -42,7 +43,7 @@ public class Ticket {
 		this.passengerName = passengerName;
 	}
 
-	
+
 	public int getTicketSerialNumber() {
 		return ticketSerialNumber;
 	}
@@ -59,7 +60,15 @@ public class Ticket {
 		this.flightDate = flightDate;
 	}
 
+	public void setFoodChoices(ArrayList<FOOD> foodChoices) {
+		foodChoices.addAll(foodChoices);
 
-	ArrayList <FOOD> foodChoices = new ArrayList<FOOD>();
-	
+	}
+
+	public ArrayList<FOOD> getFoodChoices(){
+		ArrayList<FOOD> temp = new ArrayList<>(foodChoices);
+		return temp;
+	}
+
+
 }
