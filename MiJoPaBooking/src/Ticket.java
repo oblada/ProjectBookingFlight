@@ -5,7 +5,6 @@ import java.util.Date;
 public class Ticket {
 	
 	public static int ticketNumber = 100;
-
 	private TICKETTYPE ticketType;
 	private String passengerName;
 	private int ticketSerialNumber;
