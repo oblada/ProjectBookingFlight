@@ -8,7 +8,7 @@ public enum FOOD {
 	LACTOS_INTOLERANT ("No milk products", 120), 
 	NOPORK ("Halal food", 120), 
 	NOCOW("Indian cuisine", 120),
-	POSH(" Campaign and Caviar", 500);
+	POSH(" Champaigne and Caviar", 500);
 	
 	private String verboseFood;
 	private int cost;

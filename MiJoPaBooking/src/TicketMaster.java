@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -8,25 +9,28 @@ import java.util.Scanner;
 public class TicketMaster {
 
 	static Scanner scan = new Scanner(System.in);
+	Company company;
 
 	//    Constructor ----------------------------------------------
 
-	public TicketMaster() {		//add ArrayList<Airport> destinations
-		//this.destinations = destinations;
+	public TicketMaster(Company company) {		//add ArrayList<Airport> destinations
+		this.company = company;
 	}
 
 	//Methods --------------------------------------------------
 
 	public void start() {
 		String name;
-
+		Flight flight;
+		
 		System.out.println("Enter name:"); //TODO Add ticket number for change tickets
 		name = scan.nextLine();
 		Ticket newTicket = null;
 
 		do {
-			Airport destination = getAndPresentDestinations();
-			if(destination ==null) {
+			flight = getAndPresentDestinations();
+			
+			if(flight ==null) {
 				System.out.println("No destination chosen - do you want to quit? ");
 				char choice = scan.next().charAt(0);
 				if(choice=='N' || choice=='n') continue;
@@ -34,18 +38,20 @@ public class TicketMaster {
 				System.exit(0);
 			}
 			
-			newTicket = getAndReserveSeat(name, destination);
+			
 
-			if(newTicket==null) {
-				System.out.println("Do you want to try to book another flight (Y/N)");
-				char choice = scan.next().charAt(0);
-				if(choice=='Y' || choice=='y') continue;
-				scan.close();
-				System.exit(0);
-			}
+//			if(newTicket==null) {
+//				System.out.println("Do you want to try to book another flight (Y/N)");
+//				char choice = scan.next().charAt(0);
+//				if(choice=='Y' || choice=='y') continue;
+//				scan.close();
+//				System.exit(0);
+//			}
 
-		}while(newTicket==null);
-
+		}while(flight==null);
+		
+        newTicket = getAndReserveSeat(name, flight);
+        
 		TheFoodService(newTicket);
 		
 		System.out.println("Ticket is printed! (ie everything worked, ... or it seems so anyway)");
@@ -57,19 +63,19 @@ public class TicketMaster {
 
 	//Internal Methods ----------------------------------------
 
-	private Airport getAndPresentDestinations() {
-		List<Airport> airportList = Arrays.asList(Airport.values());
-		Airport destination = null;
+	private Flight getAndPresentDestinations() {
+		List<Flight> airportList = company.getFlights();
+		Flight flight = null;
 		boolean finished = false;
 		
-		
+		int a = 0;
 		int n = 0;
 		System.out.println("Chose destination:");
 		do {
 			int i = 1;
-			int a = 0;
-		for (Airport temp : airportList) {
-			System.out.println(i+": "+temp.getCity());
+			
+		for (Flight temp : airportList) {
+			System.out.println(i+": From"+temp.getTackOff().getCity()+" to "+temp.getDestination().getCity());
 			i++;
 		}
 
@@ -81,28 +87,30 @@ public class TicketMaster {
 			continue;
 		}
 		scan.nextLine();
-		destination = airportList.get(a-1);
+		
 		finished = true;
 		if(n>10) {
 			System.out.println("Bailing from loop due to going around and around");
 		}
 		}while(!finished);
 		
-		return destination;
+		flight = airportList.get(a-1);
+		System.out.println(flight.toString());
+		return flight;
 	}	
 
-	private Ticket getAndReserveSeat(String name, Airport destination) {
+	private Ticket getAndReserveSeat(String name, Flight flight) {
 
 		boolean finished=false;
 
-		AirPlane flight = getTransport();
+	
 
 		do {
-			ArrayList<Ticket> firstClassSeatsUsed = flight.mySeatFirstClass;
-			ArrayList<Ticket> economySeatsUsed = flight.mySeatBusinessClass;
+			int firstClassSeatsUsed = flight.getNumberFirstClassTickets();
+			int economySeatsUsed = flight.getNumberEconomyTickets();
 
-			int freeFirstClassSeats = flight.numberOfSeatsFirstClass - firstClassSeatsUsed.size();
-			int freeEconomySeats = flight.numberOfSeatsBusinessClass - economySeatsUsed.size();
+			int freeFirstClassSeats = flight.getAirPlane().numberOfSeatsFirstClass - firstClassSeatsUsed;
+			int freeEconomySeats = flight.getAirPlane().numberOfSeatsBusinessClass - economySeatsUsed;
 
 			System.out.println("On this flight there are "+freeFirstClassSeats+" seats free in First Class");
 			System.out.println("On this flight there are also "+freeEconomySeats+" seats free in Economy Class");
@@ -114,8 +122,8 @@ public class TicketMaster {
 
 				if(choice=='Y' || choice=='y') {
 
-					Ticket newTicket = new Ticket(TICKETTYPE.FIRST, name, flight, "Hemma", destination, firstClassSeatsUsed.size()+1, 12);
-					flight.mySeatFirstClass.add(newTicket);
+					Ticket newTicket = new Ticket(TICKETTYPE.FIRST, name, LocalDateTime.now(), flight);
+
 					return newTicket;
 
 				}
@@ -126,8 +134,8 @@ public class TicketMaster {
 				System.out.println("Then you want to have to travel economy class? (Y/N)");
 				char choice = scan.next().charAt(0);
 				if(choice=='Y' || choice=='y') {
-					Ticket newTicket = new Ticket(TICKETTYPE.ECONOMY, name, flight, "Hemma", destination, economySeatsUsed.size()+1, 12);
-					flight.mySeatBusinessClass.add(newTicket);
+					Ticket newTicket = new Ticket(TICKETTYPE.ECONOMY, name,LocalDateTime.now(), flight);
+
 					return newTicket;
 				} else {
 					System.out.println("Do you want to restart the booking? (Y/N)");
@@ -151,10 +159,7 @@ public class TicketMaster {
 		return null;
 	}
 
-	private AirPlane getTransport() {
 
-		return new PassengerPlane("The Goose", 20, 5, 5, 2012, "Catalina", "23");
-	}
 
 	private void TheFoodService(Ticket newTicket) {
 		System.out.println("Do you want to have a meal on the flight? (Y/N)");
@@ -162,7 +167,7 @@ public class TicketMaster {
 		ArrayList<FOOD> foodChoices = new ArrayList<>();
 		if(choice=='Y' || choice=='y') {
 			List<FOOD> foodList = Arrays.asList(FOOD.values());
-			if(newTicket.ticketType == TICKETTYPE.FIRST) { // First class food
+			if(newTicket.getTicketName() == TICKETTYPE.FIRST) { // First class food
 				boolean finished = false;
 				do {
 					int n=0;
@@ -225,7 +230,7 @@ public class TicketMaster {
 				foodChoices.add(FOOD.NOTHING);
 			}
 
-		 newTicket.setFoodChoices(foodChoices);
+		  newTicket.setFoodChoices(foodChoices);
 
 		}
 // Getters and Setters -------------------------------------
