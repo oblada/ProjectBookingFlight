@@ -1,5 +1,5 @@
 
-public enum Food {
+public enum FOOD {
 	NOTHING, VEGETARIAN, FISH_ALLERGY, LACTOS_INTOLERANT, NOPORK, NOCOW
 
 }
