@@ -19,10 +19,6 @@ public class TicketMaster {
 
 	public void start() {
 		String name;
-		TICKETTYPE ticketType;
-		Food foodChoice;
-
-		int seat;
 
 		System.out.println("Enter name:"); //TODO Add ticket number for change tickets
 		name = scan.nextLine();
@@ -30,38 +26,67 @@ public class TicketMaster {
 
 		do {
 			Airport destination = getAndPresentDestinations();
-
+			if(destination ==null) {
+				System.out.println("No destination chosen - do you want to quit? ");
+				char choice = scan.next().charAt(0);
+				if(choice=='N' || choice=='n') continue;
+				scan.close();
+				System.exit(0);
+			}
+			
 			newTicket = getAndReserveSeat(name, destination);
 
 			if(newTicket==null) {
 				System.out.println("Do you want to try to book another flight (Y/N)");
 				char choice = scan.next().charAt(0);
-				if(choice=='N' || choice=='n') return;
+				if(choice=='Y' || choice=='y') continue;
+				scan.close();
+				System.exit(0);
 			}
 
 		}while(newTicket==null);
 
 		TheFoodService(newTicket);
-
+		
+		System.out.println("Ticket is printed! (ie everything worked, ... or it seems so anyway)");
+		scan.close();
 	}
 
 
 
 
 	//Internal Methods ----------------------------------------
-	
+
 	private Airport getAndPresentDestinations() {
 		List<Airport> airportList = Arrays.asList(Airport.values());
-		int i =1;
+		Airport destination = null;
+		boolean finished = false;
+		
+		
+		int n = 0;
 		System.out.println("Chose destination:");
+		do {
+			int i = 1;
+			int a = 0;
 		for (Airport temp : airportList) {
 			System.out.println(i+": "+temp.getCity());
 			i++;
 		}
 
-		int a = Integer.parseInt(scan.next());
+		try {
+			a = Integer.parseInt(scan.next());
+		} catch (Exception e) {
+			System.out.println("Only numbers allowed as input");
+			scan.nextLine();		
+			continue;
+		}
 		scan.nextLine();
-		Airport destination = airportList.get(a-1);
+		destination = airportList.get(a-1);
+		finished = true;
+		if(n>10) {
+			System.out.println("Bailing from loop due to going around and around");
+		}
+		}while(!finished);
 		
 		return destination;
 	}	
@@ -69,7 +94,7 @@ public class TicketMaster {
 	private Ticket getAndReserveSeat(String name, Airport destination) {
 
 		boolean finished=false;
-		
+
 		AirPlane flight = getTransport();
 
 		do {
@@ -98,7 +123,7 @@ public class TicketMaster {
 
 			if(freeEconomySeats>0) {
 
-				System.out.println("Then will have to travel economy class? (Y/N");
+				System.out.println("Then you want to have to travel economy class? (Y/N)");
 				char choice = scan.next().charAt(0);
 				if(choice=='Y' || choice=='y') {
 					Ticket newTicket = new Ticket(TICKETTYPE.ECONOMY, name, flight, "Hemma", destination, economySeatsUsed.size()+1, 12);
@@ -108,7 +133,11 @@ public class TicketMaster {
 					System.out.println("Do you want to restart the booking? (Y/N)");
 					char choiceB = scan.next().charAt(0);
 					if(choiceB=='Y' || choiceB=='y') continue;
-					else return null;
+					else {
+						System.out.println("Bailing out");
+						scan.close();
+						System.exit(0);
+					}
 				}
 			}
 
@@ -123,19 +152,83 @@ public class TicketMaster {
 	}
 
 	private AirPlane getTransport() {
-		
+
 		return new PassengerPlane("The Goose", 20, 5, 5, 2012, "Catalina", "23");
 	}
 
 	private void TheFoodService(Ticket newTicket) {
 		System.out.println("Do you want to have a meal on the flight? (Y/N)");
 		char choice = scan.next().charAt(0);
+		ArrayList<FOOD> foodChoices = new ArrayList<>();
 		if(choice=='Y' || choice=='y') {
-			
-		}
+			List<FOOD> foodList = Arrays.asList(FOOD.values());
+			if(newTicket.ticketType == TICKETTYPE.FIRST) { // First class food
+				boolean finished = false;
+				do {
+					int n=0;
+					int i=1;
+					int a = 0;
+					for (FOOD temp : foodList) {
+						System.out.println(i+": "+temp.getFood());
+						i++;
+					}
+					try {
+						a = Integer.parseInt(scan.next());
+					} catch (NumberFormatException e) {
+						System.out.println("Only numbers allowed as input");
+						scan.nextLine();		
 
-	}
+						continue;
+					}
+					scan.nextLine();
+					foodChoices.add(foodList.get(a-1));
+					System.out.println("Anything else? (Y/N)");
+					char choiceB = scan.next().charAt(0);
+					if(choiceB=='N' || choiceB=='n') finished =true;// bail out
+					if(choiceB=='Y' || choiceB=='y') n =0;
+					// check if we just are going round and round in the loop
+					n++;
+					if(n>10) finished =true;
+				}while(!finished);
+			}else { // Economy class food
+				boolean finished = false;
+				do {
+					int n=0;
+					int i=1;
+					int a = 0;
+					for (FOOD temp : foodList) {
+						if (temp.getCost()<200) System.out.println(i+": "+temp.getFood());
+						i++;
+					}
+
+					try {
+						a = Integer.parseInt(scan.next());
+					} catch (NumberFormatException e) {
+						System.out.println("Only numbers allowed as input");
+						scan.nextLine();		
+
+						continue;
+					}
+					scan.nextLine();
+					foodChoices.add(foodList.get(a-1));
+					System.out.println("Anything else? (Y/N)");
+					char choiceC = scan.next().charAt(0);
+					if(choiceC=='N' || choiceC=='n') finished =true;// bail out
+					if(choiceC=='Y' || choiceC=='y') n =0;
+					// check if we just are going round and round in the loop
+					n++;
+					if(n>10) finished =true;
+				}while(!finished);
+			}
+			}else {
+				System.out.println("Starve then!");
+				foodChoices.add(FOOD.NOTHING);
+			}
+
+		 newTicket.setFoodChoices(foodChoices);
+
+		}
 // Getters and Setters -------------------------------------
 
 
-}
+	}
