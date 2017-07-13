@@ -7,8 +7,8 @@ public class PassengerPlane extends AirPlane {
 	private String model;
 	
 	
-	public PassengerPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass, String modelName, String model) {
-		super(airPlaneName, numberOfSeatsFirstClass, numberOfSeatsBusinessClass);
+	public PassengerPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass, double flyHours, int i, String modelName, String model) {
+		super(airPlaneName, numberOfSeatsFirstClass, numberOfSeatsBusinessClass, flyHours, i);
 		this.modelName = modelName;
 		this.model = model;
 		

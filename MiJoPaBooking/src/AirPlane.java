@@ -8,16 +8,11 @@ public abstract class AirPlane {
 	protected int numberOfSeatsBusinessClass;
 
 	
-	
-	
-	
-	
 	//Constructor
 	public AirPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass) {
 		this.airPlaneName = airPlaneName;
 		this.numberOfSeatsFirstClass = numberOfSeatsFirstClass;
 		this.numberOfSeatsBusinessClass = numberOfSeatsBusinessClass;
-	
 	
 		
 	}
