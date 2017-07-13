@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Ticket {
@@ -13,6 +14,7 @@ public class Ticket {
 	int seatNumber;
 	Date dateOfIssue;
 	int flightDate;
+	ArrayList<FOOD> foodChoices = new ArrayList<>();
 	
 	
 	
@@ -98,7 +100,16 @@ public class Ticket {
 		this.flightDate = flightDate;
 	}
 
+	public void setFoodChoices(ArrayList<FOOD> foodChoices) {
+		this.foodChoices.addAll(foodChoices);
+		
+	}
 
+public ArrayList<FOOD> getFoodChoices(){
+	
+	ArrayList<FOOD> foodList = new ArrayList<>(this.foodChoices);
+	return foodList;
+}
 
 	
 }
