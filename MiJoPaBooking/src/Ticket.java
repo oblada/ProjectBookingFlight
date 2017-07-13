@@ -8,17 +8,17 @@ public class Ticket {
 	String passengerName;
 	AirPlane flight;
 	String startingLocation;
-	String destination;
+	Airport destination;
 	int ticketSerialNumber;
 	int seatNumber;
 	Date dateOfIssue;
-	Date flightDate;
+	int flightDate;
 	
 	
 	
 	//Constructor
-	public Ticket (TICKETTYPE ticketType, String passengerName, AirPlane flight, String startingLocation, String destination, 
-					int seatNumber, Date flightDate ){
+	public Ticket (TICKETTYPE ticketType, String passengerName, AirPlane flight, String startingLocation, Airport destination2, 
+					int seatNumber, int i ){
 		Ticket.ticketNumber++;
 		this.ticketSerialNumber = ticketNumber;
 		
@@ -26,9 +26,9 @@ public class Ticket {
 		this.passengerName = passengerName;
 		this.flight =flight;
 		this.startingLocation = startingLocation;
-		this.destination = destination;		
+		this.destination = destination2;		
 		this.seatNumber = seatNumber;
-		this.flightDate=flightDate;
+		this.flightDate=i;
 				
 	}
 
@@ -74,11 +74,11 @@ public class Ticket {
 		this.startingLocation = startingLocation;
 	}
 
-	public String getDestination() {
+	public Airport getDestination() {
 		return destination;
 	}
 
-	public void setDestination(String destination) {
+	public void setDestination(Airport destination) {
 		this.destination = destination;
 	}
 
@@ -90,11 +90,11 @@ public class Ticket {
 		return dateOfIssue;
 	}
 
-	public Date getFlightDate() {
+	public int getFlightDate() {
 		return flightDate;
 	}
 
-	public void setFlightDate(Date flightDate) {
+	public void setFlightDate(int flightDate) {
 		this.flightDate = flightDate;
 	}
 
