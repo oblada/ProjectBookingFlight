@@ -155,13 +155,59 @@ public class Company {
 		
 	}
 	
+	/**
+	 * Creates a new flight for an AirPlane from Airport at given LocalDateTime, chooses a destination at random 
+	 * @param start
+	 * @param airplane
+	 * @param ldt
+	 * @return
+	 */
+	public Flight generateFlight(Airport start, AirPlane airplane, LocalDateTime ldt) {
+		Random random 						= new Random();
+		Airport dest						= start;
+		Airport[] ap 						= Airport.values();
+		
+		while (start == dest) {
+			dest 							= ap[random.nextInt(ap.length)];
+		}
+		
+		return new Flight(start, dest, ldt, airplane/*, new ArrayList<Ticket>()*/);
+	}
+	
+	/**
+	 * Checks where the Airplane last destination is (otherwise a random Airport is picked)
+	 * and when it last flew date (if the AirPlane is new this is set to today), then generates five new flights for this plane 
+	 */
+	public void createFlightSchedule(AirPlane airplane) {
+		Random random 						= new Random();
+		LocalDateTime ldt					= LocalDateTime.now();
+		Airport[] ap 						= Airport.values();
+		Airport start						= ap[random.nextInt(ap.length)];
+		for (Flight flight : flights) {
+			if (flight.getAirPlane() == airplane) {
+				ldt							= flight.getDeparturTime();
+				start						= flight.getDestination();
+			}
+		}
+		
+		for (int days = 1; days <= 5; days++) {
+			Flight newFlight				= generateFlight(start, airplane, ldt.plusDays(days));
+			addFlight(newFlight);
+			start							= newFlight.getDestination(); 
+		}
+		
+	}
+
+	/*
+	 * method added that is used for testing the application, should be moved somewhere else
+	 */
 	public void generateFlights() {
 		
 		Random random 		= new Random();
 		Airport[] ap 		= Airport.values();
 		String[] names		= {"Ignatz Ratzkywatzky", "I Zitzkywitzky", "Trudy Kockenlocker", "Lady Eve Sidwich", 
 								"Sinclair Beckstein", "John L Sullivan", "Dan McGinty", "Woodrow Truesmith",
-								"Norval Jones", "JD Hackensacker III"};
+								"Norval Jones", "JD Hackensacker III", "Seargent Heppelfinger"};
 		int l				= names.length;
 		
 		for (AirPlane airplane: getAirplanes()) {
@@ -176,7 +222,7 @@ public class Company {
 					dest 		= random.nextInt(ap.length);
 				}
 				
-				Flight flight 	= new Flight(ap[start], ap[dest], LocalDateTime.now().plusDays(days), airplane, new ArrayList<Ticket>());
+				Flight flight 	= new Flight(ap[start], ap[dest], LocalDateTime.now().plusDays(days), airplane/*, new ArrayList<Ticket>()*/);
 				//Generate tickets
 				int nop			= random.nextInt(seats);
 				TICKETTYPE tp;

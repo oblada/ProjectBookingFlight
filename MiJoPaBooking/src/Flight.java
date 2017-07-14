@@ -31,14 +31,14 @@ public class Flight {
 	 * @param airPlane
 	 * @param ticket
 	 */
-	public Flight(Airport tackOff, Airport destination, LocalDateTime departurTime, AirPlane airPlane,
-			ArrayList<Ticket> ticket) {
+	public Flight(Airport tackOff, Airport destination, LocalDateTime departurTime, AirPlane airPlane/*,
+			ArrayList<Ticket> ticket*/) {
 		flightNumber++;
 		this.tackOff = tackOff;
 		this.destination = destination;
 		this.departurTime = departurTime;
 		this.airPlane = airPlane;
-		this.ticket = ticket;
+		//this.ticket = ticket;
 		this.flightSerialNumber = flightNumber;
 	}
 
