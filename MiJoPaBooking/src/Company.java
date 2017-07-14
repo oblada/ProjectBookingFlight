@@ -128,22 +128,27 @@ public class Company {
 	public int calcuteFlightResult(int flightNumber) {
 		
 		int profit							= 0;
+		int multiplier						= 1; //multiply the price of the food 
 		Flight flight						= findFlightByFlightNumber(flightNumber);
 		
 		if (flight != null) {
 			int totalIncome					= 0;
 			
-			for (Ticket ticket : flight.getTicket()) {
+			ArrayList<Ticket> tickets		= flight.getTicket();
+			
+			for (Ticket ticket : tickets ) {
+				multiplier					= ticket.getTicketName() == TICKETTYPE.FIRST ? 2 : 1;
 				totalIncome += ticket.getTicketName().getCostOfTicket();
-				//Here we will loop through all the passengers and calculate the foodcost
-				//totalIncome += ticket.calculateTicketPrice()
+				for (FOOD f : ticket.getFoodChoices()) {
+					totalIncome += (f.getCost() * multiplier);
+				}
 			}
 			
 			int totalCost	= TICKETTYPE.ECONOMY.getCostOfTicket() * flight.getAirPlane().numberOfSeatsBusinessClass;
 			totalCost += TICKETTYPE.FIRST.getCostOfTicket() * flight.getAirPlane().numberOfSeatsFirstClass;
 			totalCost *= 0.7;
 			
-			profit 							= totalCost - totalIncome;
+			profit 							= totalIncome - totalCost;
 		}
 		
 		return profit;
