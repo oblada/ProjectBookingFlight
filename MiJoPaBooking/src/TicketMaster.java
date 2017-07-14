@@ -1,8 +1,6 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,17 +24,34 @@ public class TicketMaster {
 		Flight flight;
 		int priceOfTicket;
 		boolean TicketMasterfinished=false;
-
+		boolean validName=false;
+		
+		do {
 		System.out.println("Enter name (or ticket number to change existing ticket):");
 		name = scan.nextLine();
-		if(Integer.parseInt(name) !=0) ticketChanger(Integer.parseInt(name));
+		
+		//check to see if number is entered and thus a ticket to change
+		try {
+			if(Integer.parseInt(name)>0) {
+				ticketChanger(Integer.parseInt(name));
+				return;
+			}
+		} catch (NumberFormatException e) {
+			//just ignore this if not a number
+		}
+		
+		// We don't accept names to short, get a real name for heavens sake!
+			if(name.length()>3) validName=true;
+				
+		}while(!validName);
+	
 		Ticket newTicket = null;
 
 		do {
 			do {
 				flight = getAndPresentDestinations();
 
-				if(flight ==null) {
+				if(flight == null) {
 					System.out.println("No destination chosen - do you want to quit? ");
 					char choice = scan.next().charAt(0);
 					scan.nextLine();
@@ -107,7 +122,7 @@ public class TicketMaster {
 		Ticket oldTicket = company.findTicket(ticketNumber);
 		int a=0;
 		boolean finished=false;
-		Flight flightToKill=oldTicket.getFlight();
+		Flight flightToChange=oldTicket.getFlight();
 		do {
 			
 			System.out.println("What is wrong?");
@@ -130,27 +145,36 @@ public class TicketMaster {
 		}while(!finished);
 		
 		switch (a) {
-		case 1:
+		case 1: // Changing where to fly
+			int priceOfoldTicket = getPrice(oldTicket);
 			Flight newFlight= getAndPresentDestinations();
 			Ticket newTicket = getAndReserveSeat(oldTicket.getPassengerName(), newFlight);
 			TheFoodService(newTicket);
-			int priceOfTicket = getPrice(newTicket);
-			System.out.println("The cost for this ticket will be "+ priceOfTicket);
+			int priceOfNewTicket = getPrice(newTicket);
+			
+			int cost1 = priceOfoldTicket-priceOfNewTicket;
+			if(cost1<0) System.out.println("You will be refunded"+(-cost1/2));
+			else System.out.println("The cost for this ticket will be "+ (cost1+500));
+			
 			System.out.println("Accept ticket? (Y/N)");
 			char choice = scan.next().charAt(0);
 			scan.nextLine();
 
 			if(choice=='Y' || choice=='y') {
-				newTicket.setTicketPrice(priceOfTicket);
+				newTicket.setTicketPrice(priceOfNewTicket);
 				System.out.println("Ticket is printed! (ie everything worked, ... or it seems so anyway)");
-				flightToKill.removeTicket(oldTicket);
+				flightToChange.removeTicket(oldTicket);
 				break;
 			}
 			newFlight.removeTicket(newTicket);
 			System.out.println("Ok, restarting from the beginning");
 			break;
-		case 2:
-			System.out.println("not implemented yet!");
+		case 2: // Just changing the food
+			int priceOfTicket1 = getPrice(oldTicket);
+			TheFoodService(oldTicket);
+			int priceOfTicket2 = getPrice(oldTicket);
+			int cost2=Math.max(50,priceOfTicket1-priceOfTicket2+50);
+			System.out.println("You will be charged"+cost2);
 			break;
 		case 3:
 			System.out.println("not implemented yet!");
