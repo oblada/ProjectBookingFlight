@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Ticket {
 
+	/** Ticket number starts at 100	 */
+	
 	public static int ticketNumber = 100;
 
 	private TICKETTYPE ticketType;
@@ -14,6 +16,7 @@ public class Ticket {
 	private Flight flight;
 	private int ticketPrice;
 	
+	/** List of food that customer can choose from.	 */	
 	private ArrayList <FOOD> foodChoices = new ArrayList<FOOD>();
 
 	//Constructor
@@ -72,6 +75,17 @@ public class Ticket {
 		return temp;
 	}
 	
+	public Flight getFlight() {		
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
+	}
+
+	/**
+	 * @return Ticket price calculates in TicketMaster
+	 */
 	public int getTicketPrice(){
 		return ticketPrice;
 	}
