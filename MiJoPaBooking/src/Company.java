@@ -11,28 +11,49 @@ import java.util.stream.Collectors;
  */
 
 public class Company {
-	/** List of the airplanes */
+	/** List of the airplanes the company owns*/
 	private ArrayList<AirPlane> airplanes	= new ArrayList<AirPlane>();
+	
+	/** List of the flights the company has flown and is going to fly*/ 
 	private ArrayList<Flight> flights		= new ArrayList<Flight>();
 	
+	/**
+	 * Default constructor, creates three airplanes
+	 */
 	public Company() {
 		airplanes.add(new PassengerPlane("CrashN", 5, 5, "Tupol", "V"));
 		airplanes.add(new PassengerPlane("Burn", 10, 20, "Sputter", "000"));
 		airplanes.add(new PassengerPlane("N2DGround", 8, 14, "GasBag", "Hindenburg"));
 	}
 	
+	/**
+	 * 
+	 * @return an ArrayList of AirPlane
+	 */
 	public ArrayList<AirPlane> getAirplanes() {
 		return airplanes;
 	}
 
+	/**
+	 * 
+	 * @return an ArrayList of Flight
+	 */
 	public ArrayList<Flight> getFlights() {
 		return flights;
 	}
 	
+	/**
+	 * 
+	 * @param airplane
+	 */
 	public void addAirplane(AirPlane airplane) {
 		airplanes.add(airplane);
 	}
 	
+	/**
+	 * Removes an airplane and removes all of its flights
+	 * @param airplane
+	 */
 	public void removeAirplane(AirPlane airplane) {
 		Iterator<Flight> it					= flights.iterator();
 		while (it.hasNext()) {
@@ -43,10 +64,19 @@ public class Company {
 		airplanes.remove(airplane);
 	}
 	
+	/**
+	 * Adds a Flight to list of flights
+	 * @param flight
+	 */
 	public void addFlight(Flight flight) {
 		flights.add(flight);
 	}
 	
+	/**
+	 * Find a flight by the flightnumber, returns null if none is found
+	 * @param flightNumber
+	 * @return
+	 */
 	public Flight findFlightByFlightNumber(int flightNumber) {
 		for (Flight flight : flights) {
 			if (flight.getFlightSerialNumber() == flightNumber) {
@@ -56,15 +86,45 @@ public class Company {
 		return null;
 	}
 	
+	/**
+	 * Gets a list of all flights flying out of one Airport
+	 * @param airport
+	 * @return
+	 */
 	public List<Flight> findFlightFrom(Airport airport){
 		return flights.stream().filter(a -> a.getTackOff() == airport).collect(Collectors.toList());
 	}
 	
+	/**
+	 * Gets a list of all flights with the destination Airport
+	 * @param airport
+	 * @return
+	 */
 	public List<Flight> findFlightDestination(Airport airport){
 		return flights.stream().filter(a -> a.getDestination() == airport).collect(Collectors.toList());
 	}
 	
+	/**
+	 * Searches through the flights and returns the ticket specified by the ticketNumber
+	 * @param ticketNumber
+	 * @return
+	 */
+	public Ticket findTicket(int ticketNumber) {
+		for (Flight flight : flights) {
+			for (Ticket ticket : flight.getTicket()) {
+				if (ticket.getTicketSerialNumber() == ticketNumber) {
+					return ticket;
+				}
+			}
+		}
+		return null;
+	}
 	
+	/**
+	 * Calculates the the cost and incomes of the flight and returns the difference 
+	 * @param flightNumber
+	 * @return
+	 */
 	public int calcuteFlightResult(int flightNumber) {
 		
 		int profit							= 0;
