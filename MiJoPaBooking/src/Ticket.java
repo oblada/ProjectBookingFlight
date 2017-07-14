@@ -12,6 +12,8 @@ public class Ticket {
 	private LocalDateTime dateOfIssue;
 	private LocalDateTime flightDate;
 	private Flight flight;
+	private int ticketPrice;
+	
 	private ArrayList <FOOD> foodChoices = new ArrayList<FOOD>();
 
 	//Constructor
@@ -68,6 +70,14 @@ public class Ticket {
 		//ArrayList<FOOD> temp = new ArrayList<>(foodChoices);
 		return foodChoices;
 	}
+	
+	public int getTicketPrice(){
+		return ticketPrice;
+	}
 
+	public void setTicketPrice(int ticketPrice) {
+		this.ticketPrice = ticketPrice;
+	}
 
+	
 }
