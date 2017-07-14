@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TicketMaster {
+	
+	/**
+	 * The Ticketmaster is a central class acting as the interface towards customers and channelling information to a company.
+	 * It can be instantiated by different companies and by different customers (thread safe not implemented).
+	 * It is a command line interface.
+	 */
 
 	static Scanner scan = new Scanner(System.in);
 	Company company;
