@@ -66,13 +66,12 @@ public class Ticket {
 	}
 
 	public void setFoodChoices(ArrayList<FOOD> foodChoices) {
-		foodChoices.addAll(foodChoices);
-
+		this.foodChoices = foodChoices;
 	}
 
 	public ArrayList<FOOD> getFoodChoices(){
-		ArrayList<FOOD> temp = new ArrayList<>(foodChoices);
-		return temp;
+		//ArrayList<FOOD> temp = new ArrayList<>(foodChoices);
+		return foodChoices;
 	}
 	
 	public Flight getFlight() {		
