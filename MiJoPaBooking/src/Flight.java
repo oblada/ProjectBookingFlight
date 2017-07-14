@@ -59,6 +59,10 @@ public class Flight {
 	public void addTicket(Ticket t) {
 		ticket.add(t);
 	}
+	
+	public void removeTicket(Ticket t) {
+		ticket.remove(t);
+	}
 
 	public int getNumberFirstClassTickets() {
 		int count = 0;
@@ -80,5 +84,8 @@ public class Flight {
 		return count;
 	}
 	
+	public String toString() {
+		return "From: " + getTackOff() + "\nTo:   " + getDestination() + "\nDate: " + getDeparturTime();
+	}
 	
 }
