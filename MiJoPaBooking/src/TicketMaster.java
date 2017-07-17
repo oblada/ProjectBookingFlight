@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TicketMaster {
-	
+
 	/**
 	 * The Ticketmaster is a central class acting as the interface towards customers and channelling information to a company.
 	 * It can be instantiated by different companies and by different customers (thread safe not implemented).
 	 * It is a command line interface.
+	 * 
+	 * @author  Mikael Hansson
 	 */
 
 	static Scanner scan = new Scanner(System.in);
@@ -24,11 +26,11 @@ public class TicketMaster {
 	}
 
 	//Methods --------------------------------------------------
-/**
- * This is the source of ticket instances and could be called from different 
- * sources into different threads (thread safe not implemented yet).
- * Care is taken to curate input and and option of change an existing ticket is given.
- */
+	/**
+	 * This is the source of ticket instances and could be called from different 
+	 * sources into different threads (thread safe not implemented yet).
+	 * Care is taken to curate input and and option of change an existing ticket is given.
+	 */
 	public void start() {
 		String name;
 		Flight flight;
@@ -36,7 +38,7 @@ public class TicketMaster {
 		boolean TicketMasterfinished=false;
 		boolean validName=false;
 
-		do {
+		do {// do until a number of a name is entered.
 			System.out.println("Enter name (or ticket number to change existing ticket):");
 			name = scan.nextLine();
 
@@ -123,7 +125,7 @@ public class TicketMaster {
 
 
 	//Internal Methods ----------------------------------------
-	
+
 	/**
 	 * This method allows the user to change certain aspects of an existing ticket (and 
 	 * displays the extra charge/reimbursement.
@@ -207,7 +209,7 @@ public class TicketMaster {
 		}
 
 	}
-	
+
 	/**
 	 * A method that catch the available flights that can be booked from the company
 	 *  that the Ticketmaster object is initialised with.
@@ -251,14 +253,14 @@ public class TicketMaster {
 		System.out.println(myFlight.toString());
 		return myFlight;
 	}	
-	
-/**
- * This method uses the flight to locate free seats (of both economy and First class) 
- * on the chosen flight and presents them to the customer to chose.	
- * @param name The customers name 
- * @param flight A flight must be chosen either as a new customer or from an existing ticket.
- * @return Returns an ticket to be further processed (food) already registered in the company database.
- */
+
+	/**
+	 * This method uses the flight to locate free seats (of both economy and First class) 
+	 * on the chosen flight and presents them to the customer to chose.	
+	 * @param name The customers name 
+	 * @param flight A flight must be chosen either as a new customer or from an existing ticket.
+	 * @return Returns an ticket to be further processed (food) already registered in the company database.
+	 */
 	private Ticket getAndReserveSeat(String name, Flight flight) {
 
 		boolean finished=false;
@@ -318,11 +320,11 @@ public class TicketMaster {
 		return null; // Just a check to be sure we return something
 	}
 
-/**
- * In this method food is chosen and added to an existing ticket. An arbitrary price limit is set 
- * to divide the food choices between First classs and Economy class.
- * @param newTicket An existing ticket is required to process.
- */
+	/**
+	 * In this method food is chosen and added to an existing ticket. An arbitrary price limit is set 
+	 * to divide the food choices between First classs and Economy class.
+	 * @param newTicket An existing ticket is required to process.
+	 */
 
 	private void TheFoodService(Ticket newTicket) {
 		System.out.println("Do you want to have a meal on the flight? (Y/N)");
@@ -394,10 +396,9 @@ public class TicketMaster {
 		}
 
 		newTicket.setFoodChoices(foodChoices);		
-
 	}
 
-	
+
 	/**
 	 *  A method to calculate price of a ticket created in earlier steps.
 	 * @param newTicket
@@ -416,7 +417,7 @@ public class TicketMaster {
 
 		return price;
 	}
-	
+
 // Getters and Setters -------------------------------------
 
 }
