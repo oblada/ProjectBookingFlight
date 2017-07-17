@@ -3,12 +3,22 @@ import java.util.Date;
 
 public abstract class AirPlane {
 	
+	/** Cache the name of the plane for AirPlane */
 	protected String airPlaneName;
+	
+	/** Captures the number of seats for the first class  */
 	protected int numberOfSeatsFirstClass;
+	
+	/** Captures the number of seats for the economy class  */
 	protected int numberOfSeatsBusinessClass;
 
 	
-	//Constructor
+	/**
+	 * Initialize the objects to set the value to enum types.
+	 * @param airPlaneName
+	 * @param numberOfSeatsFirstClass
+	 * @param numberOfSeatsBusinessClass
+	 */
 	public AirPlane(String airPlaneName, int numberOfSeatsFirstClass, int numberOfSeatsBusinessClass) {
 		this.airPlaneName = airPlaneName;
 		this.numberOfSeatsFirstClass = numberOfSeatsFirstClass;

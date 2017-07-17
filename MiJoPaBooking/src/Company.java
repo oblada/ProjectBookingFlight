@@ -214,7 +214,7 @@ public class Company {
 			
 			int start 		= random.nextInt(ap.length);
 			int dest 		= start;
-			int seats		= airplane.getnumberOfSeatsBusinessClass() + airplane.getnumberOfSeatsFirstClass();
+			//int seats		= airplane.getnumberOfSeatsBusinessClass() + airplane.getnumberOfSeatsFirstClass();
 			
 			for (int days = 1; days <= 5; days++) {
 				
@@ -224,27 +224,32 @@ public class Company {
 				
 				Flight flight 	= new Flight(ap[start], ap[dest], LocalDateTime.now().plusDays(days), airplane/*, new ArrayList<Ticket>()*/);
 				//Generate tickets
-				int nop			= random.nextInt(seats);
-				TICKETTYPE tp;
-				for (int i = 0; i < nop; i++) {
-					if (random.nextInt(10) % 2 == 0) {
-						tp		= TICKETTYPE.FIRST;
-					} else {
-						tp		= TICKETTYPE.ECONOMY;
-					}
-					Ticket t	= new Ticket(tp, names[random.nextInt(l)], LocalDateTime.now().plusDays(days), flight);
-					int f		= random.nextInt(6);
-					FOOD[] g	= FOOD.values();
-					ArrayList<FOOD> v = new ArrayList<>();
+				TICKETTYPE tp	= TICKETTYPE.ECONOMY;
+				for (int seats : new int[]{airplane.getnumberOfSeatsBusinessClass(), airplane.getnumberOfSeatsFirstClass()}) {
+					int nop			= random.nextInt(seats);
+					//System.out.println(nop + " of " + seats);
 					
-					v.add(g[random.nextInt(6)]);
- 					
-					if (random.nextInt(2) % 2 == 0) {
-						v.add(FOOD.POSH);
-					}
-
-					t.setFoodChoices(v);
-					//flight.addTicket(t);
+					for (int i = 0; i < nop; i++) {
+//						if (random.nextInt(10) % 2 == 0) {
+//							tp		= TICKETTYPE.FIRST;
+//						} else {
+//							tp		= TICKETTYPE.ECONOMY;
+//						}
+						Ticket t	= new Ticket(tp, names[random.nextInt(l)], LocalDateTime.now().plusDays(days), flight);
+						int f		= random.nextInt(6);
+						FOOD[] g	= FOOD.values();
+						ArrayList<FOOD> v = new ArrayList<>();
+						
+						v.add(g[random.nextInt(6)]);
+	 					
+						if (random.nextInt(2) % 2 == 0) {
+							v.add(FOOD.POSH);
+						}
+	
+						t.setFoodChoices(v);
+						
+					}//flight.addTicket(t);
+					tp			= TICKETTYPE.FIRST;
 				}
 				start			= dest;
 				addFlight(flight);
