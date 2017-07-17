@@ -142,7 +142,9 @@ public class Flight {
 	
 	@Override
 	public String toString() {
-		return "From: " + getTackOff() + "\nTo:   " + getDestination() + "\nDate: " + getDeparturTime();
+		return "No:\t" + getFlightSerialNumber() + "\nFrom:\t" + getTackOff() + "\nTo:\t" + getDestination() + "\nDate:\t" + getDeparturTime()
+		 		+ "\n1st:\t" + getNumberFirstClassTickets() + " / " + getAirPlane().numberOfSeatsFirstClass
+		 		+ "\nEcon:\t" + getNumberEconomyTickets() + " / " + getAirPlane().numberOfSeatsBusinessClass;
 	}
 	
 }

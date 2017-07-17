@@ -92,6 +92,20 @@ public class Ticket {
 	public void setTicketPrice(int ticketPrice) {
 		this.ticketPrice = ticketPrice;
 	}
+	
+	public int calculateTicketPrice() {
+		int cost = getTicketName().getCostOfTicket();
+		for (FOOD f : getFoodChoices()) {
+			cost += f.getCost();
+		}
+		return cost;
+	}
+	
+	@Override
+	public String toString() {
+		String outString = String.format("%-30s%-10s%-20s%-20s%6d", getPassengerName(), getTicketName(), getFlight().getTackOff(), getFlight().getDestination(), getTicketPrice());
+		return outString;
+	}
 
 	
 }
